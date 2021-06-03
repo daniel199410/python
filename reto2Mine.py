@@ -28,7 +28,7 @@ while counter < 3:
     if favorito == 6:
         print("Seleccione opción favorita")
         favorita = int(input(""))
-        if favorita >= 1 <= 5:
+        if favorita in range(1, 6):
             counter = 0
             adivinanza1 = int(input(
                 "Para confirmar por favor responda:Me separaron de mi hermano siamés,antes era un ocho y ahora "
