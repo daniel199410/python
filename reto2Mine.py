@@ -22,7 +22,7 @@ list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zon
              "Elegir opción de menú favorita", "Cerrar sesión"]
 counter = 0
 print_list(list_menu)
-while counter < 3:
+while counter <= 3:
     print("Elija una opción")
     favorito = int(input(""))
     if favorito == 6:
