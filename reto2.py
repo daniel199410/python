@@ -1,6 +1,19 @@
 from os import system, name
 
 
+def print_list(_list_):
+    x = 0
+    txt = ''
+    while x < len(_list_):
+        txt = '{} {}'.format(txt, '{}. {}'.format(x + 1, _list_[x]))
+        if x < len(_list_) - 1:
+            txt = txt + ","
+        else:
+            txt = txt + "."
+        x += 1
+    print(txt)
+
+
 def clear():
     # for windows
     if name == 'nt':
@@ -10,18 +23,19 @@ def clear():
         _ = system('clear')
 
 
-list_menu = ["1. Cambiar contraseña", "2. Ingresar coordenadas actuales", "3. Ubicar zona wifi más cercana",
-             "4. Guardar archivo con ubicación cercana", "5. Actualizar registros de zonas wifi desde archivo",
-             "6. Elegir opción de menú favorita", "7. Cerrar sesión"]
+list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zona wifi más cercana",
+             "Guardar archivo con ubicación cercana", "Actualizar registros de zonas wifi desde archivo",
+             "Elegir opción de menú favorita", "Cerrar sesión"]
+print_list(list_menu)
 counter = 0
-while counter < 3:
+while counter < 4:
     print("Elija una opción")
     favorito = int(input(""))
     if favorito == 6:
         counter = 0
         print("Seleccione opción favorita")
         favorita = int(input(""))
-        if favorita >= 1 <= 5:
+        if favorita in range(1, 6):
             adivinanza1 = int(input(
                 "Para confirmar por favor responda:Me separaron de mi hermano siamés,antes era un ocho y ahora "
                 "soy un: "))
@@ -30,14 +44,14 @@ while counter < 3:
                     "Para confirmar por favor responda:Soy más de uno sin llegar al tres, y llego a cuatro cuando dos "
                     "me des: "))
                 if adivinanza2 == 2:
-                    eliminado = list_menu.pop(favorita)
+                    eliminado = list_menu.pop(favorita - 1)
                     list_menu.insert(0, eliminado)
                     clear()
                 else:
                     print("Error")
             else:
                 print("Error")
-            print(list_menu)
+            print_list(list_menu)
         else:
             print("Error")
             break
@@ -49,4 +63,5 @@ while counter < 3:
         print('Hasta pronto')
         break
     else:
+        print("Error")
         counter += 1
