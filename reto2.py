@@ -57,7 +57,7 @@ while counter < 4:
             break
     elif favorito in range(1, 6):
         counter = 0
-        print('Usted ha elegido la opción número {}'.format(favorito))
+        print('Usted ha elegido la opción {}'.format(favorito))
         break
     elif favorito == 7:
         print('Hasta pronto')
