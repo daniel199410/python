@@ -2,6 +2,8 @@ from os import system, name
 import sys
 
 password = 23715
+coordinates = []
+m = 3
 
 
 def welcome():
@@ -84,8 +86,7 @@ def valid_lat(data):
 
 
 def add_coordinates():
-    coordinates = []
-    m = 3
+    global coordinates
     messages = ["Ingrese latitud", "Ingrese longitud"]
     for i in range(m):
         a = []
@@ -125,7 +126,29 @@ list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zon
              "Elegir opción de menú favorita", "Cerrar sesión"]
 
 
+def update_coordinates():
+    print("Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú")
+
+
+def print_coordinates():
+    gt = coordinates[0][0]
+    long_sum = 0
+    count = 0
+    lat_sum = 0
+    for i in range(m):
+        print('coordenada [latitud,longitud] {} : {}'.format(i, coordinates[i]))
+        if coordinates[i][0] > gt:
+            gt = coordinates[i][0]
+        count += 1
+        long_sum += coordinates[i][0]
+        lat_sum += coordinates[i][1]
+    print('-Coordenada ubicada más al norte {}'.format(gt))
+    print('-Coordenada promedio de todos los puntos. Latitud: {}'.format(long_sum / count))
+    print('-Coordenada promedio de todos los puntos. Longitud {}'.format(lat_sum / count))
+
+
 def main():
+    coordinates_set = False
     # welcome()
     print_list(list_menu)
     counter = 0
@@ -140,7 +163,12 @@ def main():
         elif favorito == 1:
             change_password()
         elif favorito == 2:
-            add_coordinates()
+            if not coordinates_set:
+                add_coordinates()
+                coordinates_set = True
+            else:
+                print_coordinates()
+                update_coordinates()
         elif favorito == 7:
             print('Hasta pronto')
             break
