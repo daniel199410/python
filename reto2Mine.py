@@ -174,7 +174,7 @@ def print_coordinates():
 
 def main():
     coordinates_set = False
-    # welcome()
+    welcome()
     print_list(list_menu)
     counter = 0
     while counter < 4:
