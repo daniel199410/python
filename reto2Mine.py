@@ -154,20 +154,22 @@ def update_coordinates():
 
 
 def print_coordinates():
-    gt = coordinates[0][0]
-    long_sum = 0
+    greatest_latitude_value = coordinates[0][0]
+    greatest_longitude_value = coordinates[0][1]
+    greatest_latitude_coordinate = 1
+    greatest_longitude_coordinate = 1
     count = 0
-    lat_sum = 0
     for i in range(m):
-        print('coordenada [latitud,longitud] {} : {}'.format(i, coordinates[i]))
-        if coordinates[i][0] > gt:
-            gt = coordinates[i][0]
+        print('coordenada [latitud,longitud] {} : {}'.format(i + 1, coordinates[i]))
+        if coordinates[i][0] > greatest_latitude_value:
+            greatest_latitude_value = coordinates[i][0]
+            greatest_latitude_coordinate = count + 1
+        if coordinates[i][1] > greatest_longitude_value:
+            greatest_latitude_value = coordinates[i][1]
+            greatest_longitude_coordinate = count + 1
         count += 1
-        long_sum += coordinates[i][0]
-        lat_sum += coordinates[i][1]
-    print('-Coordenada ubicada más al norte {}'.format(gt))
-    print('-Coordenada promedio de todos los puntos. Latitud: {}'.format(long_sum / count))
-    print('-Coordenada promedio de todos los puntos. Longitud {}'.format(lat_sum / count))
+    print('La coordenada {} es la que está más al norte'.format(greatest_latitude_coordinate))
+    print('La coordenada {} es la que está más al occidente'.format(greatest_longitude_coordinate))
 
 
 def main():
