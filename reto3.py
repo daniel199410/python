@@ -1,15 +1,17 @@
 from os import system, name
 
+password = 23715
+
+
 def welcome():
     print("Bienvenido al sistema de ubicación para zonas públicas WIFI")
     usuario = 51732
-    contraseña = 23715
     # usuario y contraseña
     usuario1 = int(input("Nombre de usuario"))
     if usuario1 == usuario:
-        contraseña1 = int(input("Contraseña"))
+        password1 = int(input("Contraseña"))
         # captcha
-        if contraseña1 == contraseña:
+        if password1 == password:
             numero = 5 * 2 - 7 * 1
             captcha = int(input("Ingrese valor de la suma: 732+" + str(numero)))
             if captcha == 732 + numero:
@@ -82,9 +84,9 @@ while counter < 4:
         print('Usted ha elegido la opción {}'.format(favorito))
         break
     elif favorito == 1:
-        confirmación = int(input("Confirme contraseña actual: "))
-        if confirmación == contraseña:
-            nuevacontraseña = int(input("Nueva contraseña de usuario"))
+        confirmation = int(input("Confirme contraseña actual: "))
+        if confirmation == password:
+            newPassword = int(input("Nueva contraseña de usuario"))
             print_list(list_menu)
 
         else:
@@ -103,14 +105,11 @@ while counter < 4:
             for j in messages:
                 datos1 = float(input(j))
                 a.append(datos1)
-
             coordenadas.append(a)
         print(coordenadas)
-
     elif favorito == 7:
         print('Hasta pronto')
         break
     else:
         print("Error")
         counter += 1
-
