@@ -1,6 +1,9 @@
 from os import system, name
 import sys
 
+list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zona wifi más cercana",
+             "Guardar archivo con ubicación cercana", "Actualizar registros de zonas wifi desde archivo",
+             "Elegir opción de menú favorita", "Cerrar sesión"]
 messages = ["Ingrese latitud", "Ingrese longitud"]
 password = 23715
 coordinates = []
@@ -118,11 +121,6 @@ def change_password():
     else:
         print("Error")
         sys.exit()
-
-
-list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zona wifi más cercana",
-             "Guardar archivo con ubicación cercana", "Actualizar registros de zonas wifi desde archivo",
-             "Elegir opción de menú favorita", "Cerrar sesión"]
 
 
 def update_coordinate(selected_option):
