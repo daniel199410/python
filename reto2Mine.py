@@ -1,6 +1,7 @@
 from os import system, name
 import sys
 
+messages = ["Ingrese latitud", "Ingrese longitud"]
 password = 23715
 coordinates = []
 m = 3
@@ -8,16 +9,15 @@ m = 3
 
 def welcome():
     print("Bienvenido al sistema de ubicación para zonas públicas WIFI")
-    usuario = 51732
-    # usuario y contraseña
-    usuario1 = int(input("Nombre de usuario"))
-    if usuario1 == usuario:
+    user = 51732
+    current_user = int(input("Nombre de usuario"))
+    if current_user == user:
         password1 = int(input("Contraseña"))
         # captcha
         if password1 == password:
-            numero = 5 * 2 - 7 * 1
-            captcha = int(input("Ingrese valor de la suma: 732+" + str(numero)))
-            if captcha == 732 + numero:
+            number = 5 * 2 - 7 * 1
+            captcha = int(input("Ingrese valor de la suma: 732+" + str(number)))
+            if captcha == 732 + number:
                 print("Sesión iniciada")
             else:
                 print("Error")
@@ -87,7 +87,6 @@ def valid_lat(data):
 
 def add_coordinates():
     global coordinates
-    messages = ["Ingrese latitud", "Ingrese longitud"]
     for i in range(m):
         a = []
         for j in messages:
@@ -126,8 +125,34 @@ list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zon
              "Elegir opción de menú favorita", "Cerrar sesión"]
 
 
+def update_coordinate(selected_option):
+    for j in range(len(messages)):
+        data = input(messages[j])
+        if not data.strip():
+            print("Error")
+            sys.exit()
+        else:
+            data = float(data)
+            if messages[0] == messages[j]:
+                if not valid_lat(data):
+                    print("Error coordenada")
+                    sys.exit()
+            else:
+                if not valid_long(data):
+                    print("Error coordenada")
+                    sys.exit()
+            coordinates[selected_option - 1][j] = data
+
+
 def update_coordinates():
-    print("Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar al menú")
+    selected_option = int(input("Presione 1,2 ó 3 para actualizar la respectiva coordenada. Presione 0 para regresar "
+                                "al menú"))
+    if selected_option in range(1, 4):
+        update_coordinate(selected_option)
+    else:
+        print('Error actualización')
+        sys.exit()
+    print_list(list_menu)
 
 
 def print_coordinates():
