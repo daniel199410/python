@@ -1,9 +1,17 @@
 from os import system, name
 import sys
+import math
 
 list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zona wifi más cercana",
              "Guardar archivo con ubicación cercana", "Actualizar registros de zonas wifi desde archivo",
              "Elegir opción de menú favorita", "Cerrar sesión"]
+transport_time = ["Tiempo en bus", "Tiempo en auto"]
+preferred_coordinates = [
+    {"long": 6.211, "lat": -72.482, "user_average": 2},
+    {"long": 6.212, "lat": -72.470, "user_average": 25},
+    {"long": 6.105, "lat": -72.242, "user_average": 25},
+    {"long": 6.210, "lat": -72.442, "user_average": 50},
+]
 messages = ["Ingrese latitud", "Ingrese longitud"]
 password = 23715
 coordinates = []
@@ -153,6 +161,19 @@ def update_coordinates():
     print_list(list_menu)
 
 
+def print_only_coordinates():
+    greatest_latitude_value = coordinates[0][0]
+    greatest_longitude_value = coordinates[0][1]
+    count = 0
+    for i in range(m):
+        print('coordenada [latitud,longitud] {} : {}'.format(i + 1, coordinates[i]))
+        if coordinates[i][0] > greatest_latitude_value:
+            greatest_latitude_value = coordinates[i][0]
+        if coordinates[i][1] > greatest_longitude_value:
+            greatest_latitude_value = coordinates[i][1]
+        count += 1
+
+
 def print_coordinates():
     greatest_latitude_value = coordinates[0][0]
     greatest_longitude_value = coordinates[0][1]
@@ -172,6 +193,93 @@ def print_coordinates():
     print('La coordenada {} es la que está más al occidente'.format(greatest_longitude_coordinate))
 
 
+def calculate_distance(param, coordinate):
+    _R_ = 6372.795477598
+    lat_delta = coordinate["lat"] - param[0]
+    lon_delta = coordinate["long"] - param[1]
+    return 2 * _R_ * math.asin(
+        math.sqrt(
+            math.pow(math.sin(lat_delta / 2), 2)
+            + math.cos(param[0])
+            * math.cos(coordinate["lat"])
+            * math.pow(math.sin(lon_delta / 2), 2)
+        )
+    )
+
+
+def locate_two_closest_wifi_zone(param):
+    closest_coordinates = []
+    return_coordinates = []
+    for coordinate in preferred_coordinates:
+        closest_coordinates.append({"coordinates": coordinate, "distance": calculate_distance(param, coordinate)})
+    for i in range(len(closest_coordinates)):
+        for j in range(len(closest_coordinates) - i):
+            if closest_coordinates[j]["distance"] > closest_coordinates[i]["distance"]:
+                temp = closest_coordinates[j]
+                closest_coordinates[j] = closest_coordinates[i]
+                closest_coordinates[i] = temp
+    for i in range(1, 3):
+        return_coordinates.append(closest_coordinates[i])
+    for i in range(len(return_coordinates)):
+        for j in range(len(return_coordinates)):
+            if return_coordinates[j]["coordinates"]["user_average"] > return_coordinates[i]["coordinates"][
+                "user_average"]:
+                temp = return_coordinates[j]
+                return_coordinates[j] = return_coordinates[i]
+                return_coordinates[i] = temp
+    return return_coordinates
+
+
+def calculate_direction(userCoordinates, preferredCoordinate):
+    is_eastern = 'oriente'
+    is_north = 'norte'
+    if userCoordinates[0] < preferredCoordinate["coordinates"]["long"]:
+        is_eastern = 'occidente'
+    if userCoordinates[1] < preferredCoordinate["coordinates"]["lat"]:
+        is_eastern = 'sur'
+
+    print('Para llegar a la zona wifi dirigirse primero al {} y luego hacia el {}'.format(is_eastern, is_north))
+
+
+def calculate_transport_time(zone_option, wifi_distance):
+    average_bus_speed = 20.83
+    if zone_option == 1:
+        average_bus_speed = 16.67
+    return wifi_distance / average_bus_speed
+
+
+def locate_closest_wifi_zone():
+    if len(coordinates) == 0:
+        print('Error sin registro de coordenadas')
+        sys.exit()
+    print_only_coordinates()
+    option = int(input("Por favor elija su ubicación actual (1,2 ó 3) para calcular la distancia a los puntos de "
+                       "conexión"))
+    if option not in range(len(coordinates) + 1):
+        print('Error ubicación')
+        sys.exit()
+    closest_zones = locate_two_closest_wifi_zone(coordinates[option - 1])
+    print('Zonas wifi cercanas con menos usuarios')
+    for i in range(2):
+        print('La zona wifi {}: ubicada en [{}, {}] a {} metros , tiene un promedio de {} usuarios'.format(
+            i + 1,
+            closest_zones[i]["coordinates"]["long"],
+            closest_zones[i]["coordinates"]["lat"],
+            int(closest_zones[i]["distance"]),
+            closest_zones[i]["coordinates"]["user_average"]
+        ))
+    zone_option = int(input('Elija 1 o 2 para recibir indicaciones de llegada'))
+    if zone_option not in range(1, 3):
+        print('Error zona wifi')
+        sys.exit()
+    calculate_direction(coordinates[option - 1], closest_zones[zone_option - 1])
+    print('Tiempo promedio: {} m/s'.format(calculate_transport_time(zone_option, closest_zones[0]["distance"])))
+    _exit_ = 1
+    while _exit_ != 0:
+        _exit_ = int(input('Presione 0 para salir'))
+    print_list(list_menu)
+
+
 def main():
     coordinates_set = False
     welcome()
@@ -182,7 +290,7 @@ def main():
         favorito = int(input(""))
         if favorito == 6:
             set_favorite()
-        elif favorito in range(3, 6):
+        elif favorito in range(4, 6):
             print('Usted ha elegido la opción {}'.format(favorito))
             break
         elif favorito == 1:
@@ -194,6 +302,8 @@ def main():
             else:
                 print_coordinates()
                 update_coordinates()
+        elif favorito == 3:
+            locate_closest_wifi_zone()
         elif favorito == 7:
             print('Hasta pronto')
             break
