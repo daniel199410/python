@@ -1,7 +1,10 @@
+import os.path
 from os import system, name
 import sys
+import csv
 import math
 
+FILE_NAME = 'Acceso_universal'
 list_menu = ["Cambiar contraseña", "Ingresar coordenadas actuales", "Ubicar zona wifi más cercana",
              "Guardar archivo con ubicación cercana", "Actualizar registros de zonas wifi desde archivo",
              "Elegir opción de menú favorita", "Cerrar sesión"]
@@ -321,7 +324,32 @@ def export_to_file():
 
 
 def import_from_file():
-    pass
+    global preferred_coordinates
+    if os.path.isfile(FILE_NAME + ".csv"):
+        file = open(FILE_NAME + ".csv")
+    else:
+        file = open(FILE_NAME + ".txt")
+    reader = csv.reader(file)
+    preferred_coordinates = []
+    counter = 1
+    for row in reader:
+        if not row[0].isnumeric():
+            continue
+        long = float(row[10].replace(',', '.'))
+        lat = float(row[11].replace(',', '.'))
+        users = 0
+        if row[17] != '':
+            users = int(row[16])
+        preferred_coordinates.append({"long": long, "lat": lat, "user_average": users})
+        counter += 1
+        if counter == 5:
+            break
+    while True:
+        option = int(input("Datos de coordenadas para zonas wifi actualizados, presione 0 para regresar al menú "
+                           "principal"))
+        if option == 0:
+            break
+    print_list(list_menu)
 
 
 def main():
