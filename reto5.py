@@ -17,11 +17,7 @@ preferred_coordinates = [
 ]
 messages = ["Ingrese latitud", "Ingrese longitud"]
 password = 23715
-coordinates = [
-    [6.306, -72.321],
-    [6.305, -72.322],
-    [5.888, -72.552],
-]
+coordinates = []
 closest_zones = []
 m = 3
 current_position = -1
@@ -354,7 +350,7 @@ def import_from_file():
 
 def main():
     coordinates_set = False
-    # welcome()
+    welcome()
     print_list(list_menu)
     counter = 0
     while counter < 4:
