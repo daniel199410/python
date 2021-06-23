@@ -334,7 +334,7 @@ def import_from_file():
         long = float(row[10].replace(',', '.'))
         lat = float(row[11].replace(',', '.'))
         users = 0
-        if row[17] != '':
+        if row[16] != '':
             users = int(row[16])
         preferred_coordinates.append({"long": long, "lat": lat, "user_average": users})
         counter += 1
