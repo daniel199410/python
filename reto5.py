@@ -74,16 +74,16 @@ def set_favorite():
     print("Seleccione opción favorita")
     favorite = int(input(""))
     if favorite in range(1, 6):
-        adivinanza1 = int(input(
+        guess1 = int(input(
             "Para confirmar por favor responda:Me separaron de mi hermano siamés,antes era un ocho y ahora "
             "soy un: "))
-        if adivinanza1 == 3:
-            adivinanza2 = int(input(
+        if guess1 == 3:
+            guess2 = int(input(
                 "Para confirmar por favor responda:Soy más de uno sin llegar al tres, y llego a cuatro cuando dos "
                 "me des: "))
-            if adivinanza2 == 2:
-                eliminado = list_menu.pop(favorite - 1)
-                list_menu.insert(0, eliminado)
+            if guess2 == 2:
+                deleted = list_menu.pop(favorite - 1)
+                list_menu.insert(0, deleted)
                 clear()
             else:
                 print("Error")
@@ -237,12 +237,12 @@ def locate_two_closest_wifi_zone(param):
     return return_coordinates
 
 
-def calculate_direction(userCoordinates, preferredCoordinate):
+def calculate_direction(user_coordinates, preferred_coordinate):
     is_eastern = 'oriente'
     is_north = 'norte'
-    if userCoordinates[0] < preferredCoordinate["coordinates"]["long"]:
+    if user_coordinates[0] < preferred_coordinate["coordinates"]["long"]:
         is_eastern = 'occidente'
-    if userCoordinates[1] < preferredCoordinate["coordinates"]["lat"]:
+    if user_coordinates[1] < preferred_coordinate["coordinates"]["lat"]:
         is_eastern = 'sur'
     return {"long": is_eastern, "lat": is_north}
 
@@ -331,25 +331,25 @@ def main():
     counter = 0
     while counter < 4:
         print("Elija una opción")
-        favorito = int(input(""))
-        if favorito == 1:
+        favorite = int(input(""))
+        if favorite == 1:
             change_password()
-        elif favorito == 2:
+        elif favorite == 2:
             if not coordinates_set:
                 add_coordinates()
                 coordinates_set = True
             else:
                 print_coordinates()
                 update_coordinates()
-        elif favorito == 3:
+        elif favorite == 3:
             locate_closest_wifi_zone()
-        elif favorito == 4:
+        elif favorite == 4:
             export_to_file()
-        elif favorito == 5:
+        elif favorite == 5:
             import_from_file()
-        elif favorito == 6:
+        elif favorite == 6:
             set_favorite()
-        elif favorito == 7:
+        elif favorite == 7:
             print('Hasta pronto')
             break
         else:
