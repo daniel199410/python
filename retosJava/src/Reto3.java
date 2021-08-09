@@ -20,7 +20,7 @@ public class Reto3 {
 		Alquiler alquiler2 = new Alquiler(24, cliente2, motoAcuatica, calendar.getTime(), 2);
 		Alquiler alquiler3 = new Alquiler(24, cliente3, motoAcuatica, calendar.getTime(), 4);
 		Alquiler[] alquileres = {alquiler, alquiler2, alquiler3};
-		assertEquals(cliente2, Alquiler.DescuentoClient(alquileres));
+		assertEquals(cliente2, Alquiler.DescuentoCliente(alquileres));
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class Reto3 {
 		calendar.set(Calendar.DAY_OF_MONTH, 31);
 		Alquiler alquiler3 = new Alquiler(24, cliente3, motoAcuatica, calendar.getTime(), 4);
 		Alquiler[] alquileres = {alquiler, alquiler2, alquiler3};
-		assertNull(Alquiler.DescuentoClient(alquileres));
+		assertNull(Alquiler.DescuentoCliente(alquileres));
 	}
 
 	@Test
@@ -55,6 +55,6 @@ public class Reto3 {
 		Alquiler alquiler2 = new Alquiler(24, cliente2, motoAcuatica, calendar.getTime(), 4);
 		Alquiler alquiler3 = new Alquiler(24, cliente3, motoAcuatica, calendar.getTime(), 1);
 		Alquiler[] alquileres = {alquiler, alquiler2, alquiler3};
-		assertEquals(cliente3, Alquiler.DescuentoClient(alquileres));
+		assertEquals(cliente3, Alquiler.DescuentoCliente(alquileres));
 	}
 }

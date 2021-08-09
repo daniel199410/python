@@ -65,7 +65,7 @@ public class Alquiler {
 		return count;
 	}
 
-	public static Cliente DescuentoClient(Alquiler[] alquileres) {
+	public static Cliente DescuentoCliente(Alquiler[] alquileres) {
 		Alquiler menor = null;
 		for(Alquiler alquiler: alquileres) {
 			if(alquiler.Cliente.getEdad() >= 18 && (menor == null || alquiler.HorasAlquiler < menor.HorasAlquiler)) {
