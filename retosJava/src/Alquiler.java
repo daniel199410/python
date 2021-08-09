@@ -48,11 +48,11 @@ public class Alquiler {
 			return 0;
 		}
 		return switch (this.Moto.getIdentificador().charAt(0)) {
-			case 'L' -> 30000 * this.HorasAlquiler;
-			case 'D' -> 45000 * this.HorasAlquiler;
-			case 'P' -> 90000 * this.HorasAlquiler;
-			default -> 50000 * this.HorasAlquiler;
-		};
+			case 'L' -> 30000;
+			case 'D' -> 45000;
+			case 'P' -> 90000;
+			default -> 50000;
+		} * this.HorasAlquiler;
 	}
 
 	public static int VentasPorRangoDias(Alquiler[] alquileres, Date min, Date max) {
