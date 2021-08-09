@@ -1,5 +1,3 @@
-package reto2;
-
 public class MotoAcuatica {
 	private final String Identificador;
 	private final String Modelo;

@@ -1,5 +1,3 @@
-package reto2;
-
 public class Cliente {
 	private final String Cedula;
 	private final int Edad;

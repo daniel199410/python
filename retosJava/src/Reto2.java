@@ -1,5 +1,3 @@
-package reto2;
-
 import org.junit.Test;
 
 import java.util.Calendar;
