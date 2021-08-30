@@ -44,6 +44,7 @@ public class Main_window {
 	private JTextField fechaFinalTextField;
 	private JButton botónConsultarButton1;
 	private JLabel ventasAcumuladasLabel;
+	private JButton botonConsultarButton2;
 
 	public Main_window() {
 		botonCrearInstanciaButton.addActionListener(e -> {
@@ -73,7 +74,7 @@ public class Main_window {
 			alquileres[Integer.parseInt(indiceAlquilerTextField.getText())] = new Alquiler(id, cliente, motoAcuatica, horas);
 		});
 		botónConsultarButton.addActionListener(e -> {
-			Alquiler alquiler = alquileres[Integer.parseInt(indiceAlquilerTextField.getText())];
+			Alquiler alquiler = alquileres[Integer.parseInt(textField1.getText())];
 			idAlquilerLabel.setText(String.format("Id: %d", alquiler.getId()));
 			clienteLabel.setText(String.format("Cliente: %s", alquiler.getCliente().getNombre()));
 			motoAcuaticaLabel.setText(String.format("Moto: %s", alquiler.getMoto().getIdentificador()));
