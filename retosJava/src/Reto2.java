@@ -61,7 +61,7 @@ public class Reto2 {
 		calendar.set(Calendar.DAY_OF_MONTH, 20);
 		Date max = calendar.getTime();
 
-		assertEquals(450000, Alquiler.VentasPorRangoDias(alquileres, min, max));
+		assertEquals(450000, Alquiler.VentasPorDias(alquileres, min, max));
 	}
 
 	@Test
@@ -95,6 +95,6 @@ public class Reto2 {
 		calendar.set(Calendar.DAY_OF_MONTH, 26);
 		Date max = calendar.getTime();
 
-		assertEquals(540000, Alquiler.VentasPorRangoDias(alquileres, min, max));
+		assertEquals(540000, Alquiler.VentasPorDias(alquileres, min, max));
 	}
 }

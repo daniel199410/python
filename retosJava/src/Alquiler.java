@@ -47,15 +47,15 @@ public class Alquiler {
 		if(this.Cliente.getEdad() < 18) {
 			return 0;
 		}
-		return switch (this.Moto.getIdentificador().charAt(0)) {
-			case 'L' -> 30000;
-			case 'D' -> 45000;
-			case 'P' -> 90000;
-			default -> 50000;
-		} * this.HorasAlquiler;
+		switch (this.Moto.getIdentificador().charAt(0)) {
+			case 'L': return  30000 * this.HorasAlquiler;
+			case 'D': return 45000 * this.HorasAlquiler;
+			case 'P': return 90000 * this.HorasAlquiler;
+			default: return 50000 * this.HorasAlquiler;
+		}
 	}
 
-	public static int VentasPorRangoDias(Alquiler[] alquileres, Date min, Date max) {
+	public static int VentasPorDias(Alquiler[] alquileres, Date min, Date max) {
 		int count = 0;
 		for (Alquiler alquiler : alquileres) {
 			if (alquiler.Fecha.compareTo(min) >= 0 && alquiler.getFecha().compareTo(max) <= 0) {
