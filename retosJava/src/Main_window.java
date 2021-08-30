@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Main_window {
@@ -92,6 +95,16 @@ public class Main_window {
 		irSiguienteVistaButton.addActionListener(e -> {
 			vistaAlquileres.setVisible(false);
 			vistaAdmin.setVisible(true);
+		});
+		botónConsultarButton1.addActionListener(e -> {
+			try {
+				Date fechaInicial =new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicialTextField.getText());
+				Date fechaFinal =new SimpleDateFormat("dd/MM/yyyy").parse(fechaFinalTextField.getText());
+				int ventas = Alquiler.VentasPorDias(this.alquileres, fechaInicial, fechaFinal);
+				ventasAcumuladasLabel.setText(String.valueOf(ventas));
+			} catch (ParseException ex) {
+				ex.printStackTrace();
+			}
 		});
 	}
 
