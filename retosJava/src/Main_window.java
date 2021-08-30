@@ -1,9 +1,6 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Main_window {
@@ -48,6 +45,9 @@ public class Main_window {
 	private JButton botónConsultarButton1;
 	private JLabel ventasAcumuladasLabel;
 	private JButton botonConsultarButton2;
+	private JLabel cedulaClienteLabel;
+	private JLabel edadClienteLabel;
+	private JLabel nombreClienteLabel;
 
 	public Main_window() {
 		botonCrearInstanciaButton.addActionListener(e -> {
@@ -104,6 +104,14 @@ public class Main_window {
 				ventasAcumuladasLabel.setText(String.valueOf(ventas));
 			} catch (ParseException ex) {
 				ex.printStackTrace();
+			}
+		});
+		botonConsultarButton2.addActionListener(e -> {
+			Cliente cliente = Alquiler.DescuentoCliente(this.alquileres);
+			if(cliente != null) {
+				cedulaClienteLabel.setText(cliente.getCedula());
+				edadClienteLabel.setText(String.valueOf(cliente.getEdad()));
+				nombreClienteLabel.setText(cliente.getNombre());
 			}
 		});
 	}

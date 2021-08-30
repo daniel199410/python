@@ -648,7 +648,7 @@
                   <text value="Cliente"/>
                 </properties>
               </component>
-              <component id="6e6" class="javax.swing.JLabel">
+              <component id="6e6" class="javax.swing.JLabel" binding="cedulaClienteLabel">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -657,7 +657,7 @@
                   <text value="Cédula: String"/>
                 </properties>
               </component>
-              <component id="7ee91" class="javax.swing.JLabel">
+              <component id="7ee91" class="javax.swing.JLabel" binding="edadClienteLabel">
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
@@ -666,13 +666,13 @@
                   <text value="Edad: int"/>
                 </properties>
               </component>
-              <component id="55f1e" class="javax.swing.JLabel">
+              <component id="55f1e" class="javax.swing.JLabel" binding="nombreClienteLabel">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
-                  <text value="Noombre: String"/>
+                  <text value="Nombre: String"/>
                 </properties>
               </component>
             </children>
