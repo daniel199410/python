@@ -77,4 +77,29 @@ public class Alquiler {
 		}
 		return null;
 	}
+
+    public static int ObtenerPublicoObjetivo(Alquiler[] alquileres) {
+        int[] publicoObjetivo = {0, 0, 0, 0};
+        for(Alquiler alquiler: alquileres) {
+            if(alquiler.Cliente.getEdad() >= 18 && alquiler.Cliente.getEdad() <= 30) {
+                publicoObjetivo[0] += 1;
+            }
+            if(alquiler.Cliente.getEdad() >= 31 && alquiler.Cliente.getEdad() <= 45) {
+                publicoObjetivo[1] += 1;
+            }
+            if(alquiler.Cliente.getEdad() >= 46 && alquiler.Cliente.getEdad() <= 60) {
+                publicoObjetivo[2] += 1;
+            }
+            if(alquiler.Cliente.getEdad() >= 61) {
+                publicoObjetivo[3] += 1;
+            }
+        }
+        int menor = 1;
+        for(int i = 1; i < publicoObjetivo.length; i++) {
+            if (publicoObjetivo[i] > publicoObjetivo[i - 1]) {
+                menor = i + 1;
+            }
+        }
+        return menor;
+    }
 }
